@@ -11,8 +11,6 @@ class Pawn extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'contract_id';
-
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }

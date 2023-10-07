@@ -20,7 +20,7 @@ class TransactionFactory extends Factory
     {
         $customer = User::where('role', 'customer')->get()->random()->national_id;
         $creator = User::all()->random()->national_id;
-        $pawn = Pawn::all()->random()->contract_id;
+        $pawn = Pawn::all()->random()->id;
 
         return [
             'customer_id' => $customer,

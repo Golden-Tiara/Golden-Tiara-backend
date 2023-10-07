@@ -18,8 +18,8 @@ class GoldFactory extends Factory
      */
     public function definition(): array
     {
-        $examination = Examination::all()->random()->contract_id;
-        $pawn = Pawn::all()->random()->contract_id;
+        $examination = Examination::all()->random()->id;
+        $pawn = Pawn::all()->random()->id;
 
         return [
             'pawn_id' => $pawn,
@@ -28,7 +28,7 @@ class GoldFactory extends Factory
             'purity' => fake()->randomFloat(2, 0, 1000000),
             'description' => fake()->sentence(),
             'image_path' => null,
-            'status' => fake()->randomElement(['examining', 'pawned', 'redeemed', 'unredeemed'])
+            'status' => fake()->randomElement(['examining', 'verified', 'unverified','pawned', 'redeemed', 'unredeemed'])
         ];
     }
 }

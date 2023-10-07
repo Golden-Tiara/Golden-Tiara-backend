@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('/', Controller::class);
+// Route::apiResource('/pawn', PawnController::class);
 
-Route::get('/pawns', [PawnController::class, 'index']);
-Route::get('/pawns/{id}', [PawnController::class, 'show']);
+Route::get('/pawn', [PawnController::class, 'index']);
+// Route::get('/pawn/{id}', [PawnController::class, 'show']);

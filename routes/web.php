@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PawnController;
 use Illuminate\Support\Facades\Route;
 
 /*

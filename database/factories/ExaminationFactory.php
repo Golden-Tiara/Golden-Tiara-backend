@@ -20,9 +20,9 @@ class ExaminationFactory extends Factory
         $customer = User::where('role', 'customer')->get()->random()->national_id;
 
         return [
-            'contract_id' => fake()->numerify('##############'),
             'customer_id' => $customer,
-            'contract_date' => fake()->dateTime()
+            'contract_date' => fake()->dateTime(),
+            'status' => fake()->randomElement(['inprogress', 'finish'])
         ];
     }
 }

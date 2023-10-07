@@ -14,7 +14,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('pawns', function (Blueprint $table) {
-            $table->string('contract_id')->primary();
+            $table->id();
             $table->foreignIdFor(User::class, 'customer_id');
             $table->foreignIdFor(Examination::class, 'examination_id');
             $table->dateTime('contract_date');
@@ -23,6 +23,9 @@ return new class extends Migration
             $table->float('loan_amount');
             $table->integer('total_term');
             $table->float('fine');
+            $table->string('shop_payout_status')->default('pending'); //pending, paid
+            $table->string('shop_payout_type'); //cash, transaction
+            $table->string('customer_account')->nullable();
             $table->float('paid_amount');
             $table->integer('paid_term');
             $table->dateTime('next_payment');

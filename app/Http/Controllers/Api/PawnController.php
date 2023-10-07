@@ -13,7 +13,7 @@ class PawnController extends Controller
      */
     public function index()
     {
-        $pawns = Pawn::all();
+        $pawns = Pawn::get();
         return $pawns;
     }
 
