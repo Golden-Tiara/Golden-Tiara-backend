@@ -28,9 +28,9 @@ class TransactionFactory extends Factory
             'amount' => fake()->randomFloat(2, 0, 1000000),
             'type' => fake()->randomElement(['onlineInstallment', 'offlineInstallment', 'ownerTransaction', 'employeeWithdraw']),
             'status' => fake()->randomElement(['inprogress', 'completed', 'rejected']),
-            'description' => fake()->sentence(),
             'pawn_id' => $pawn,
-            'term' => fake()->numberBetween()
+            'term' => fake()->numberBetween(),
+            'transaction_dateTime' => fake()->dateTime()
         ];
     }
 }

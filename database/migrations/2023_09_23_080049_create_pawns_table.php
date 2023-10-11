@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(User::class, 'customer_id');
             $table->foreignIdFor(Examination::class, 'examination_id');
-            $table->dateTime('contract_date');
-            $table->dateTime('expiry_date');
+            $table->date('contract_date');
+            $table->date('expiry_date');
             $table->float('interest_rate');
             $table->float('loan_amount');
             $table->integer('total_term');
@@ -28,8 +28,9 @@ return new class extends Migration
             $table->string('customer_account')->nullable();
             $table->float('paid_amount');
             $table->integer('paid_term');
-            $table->dateTime('next_payment');
-            $table->string('status')->default('unfinish'); //unfinish, finish
+            $table->date('next_payment');
+            $table->string('status')->default('active'); //active, finish
+            $table->binary('pdf_data')->nullable();
             $table->timestamps();
         });
     }

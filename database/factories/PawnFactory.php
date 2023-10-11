@@ -36,7 +36,7 @@ class PawnFactory extends Factory
             'paid_amount' => fake()->randomFloat(2, 0, 1000000),
             'paid_term' => fake()->numberBetween(),
             'next_payment' => fake()->dateTime(),
-            'status' => fake()->randomElement(['finish', 'unfinish'])
+            'status' => fake()->randomElement(['finish', 'active'])
         ];
     }
 }

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->float('amount');
             $table->string('type'); //onlineInstallment, offlineInstallment, ownerTransaction, employeeWithdraw
             $table->string('status'); //inprogress, completed, rejected
-            $table->string('description')->nullable();
             $table->foreignIdFor(Pawn::class, 'pawn_id');
             $table->integer('term')->nullable();
+            $table->dateTime('transaction_dateTime');
             $table->timestamps();
         });
     }

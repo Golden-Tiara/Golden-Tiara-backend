@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreignIdFor(Examination::class, 'examination_id');
             $table->float('weight');
             $table->float('purity');
-            $table->string('description')->nullable();
             $table->string('status'); //examining, verified, unverified, pawned, redeemed, unredeemed
             $table->string('image_path')->nullable();
             $table->timestamps();

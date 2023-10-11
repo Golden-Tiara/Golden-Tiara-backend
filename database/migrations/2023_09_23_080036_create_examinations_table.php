@@ -15,8 +15,9 @@ return new class extends Migration
         Schema::create('examinations', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(User::class, 'customer_id');
-            $table->dateTime('contract_date');
+            $table->date('contract_date');
             $table->string('status')->default('inprogress'); //inprogress, finish
+            $table->binary('pdf_data')->nullable();
             $table->timestamps();
         });
     }
