@@ -7,8 +7,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -32,6 +33,22 @@ class User extends Authenticatable
 
     public function comments(): HasMany {
         return $this->hasMany(Comment::class);
+    }
+
+    public function isOwner(): bool{
+        return $this->role == 'owner';
+    }
+
+    public function isSeller(): bool{
+        return $this->role == 'seller';
+    }
+
+    public function isAccountant(): bool{
+        return $this->role == 'accountant';
+    }
+
+    public function isCustomer(): bool{
+        return $this->role == 'customer';
     }
 
     /**
@@ -66,4 +83,14 @@ class User extends Authenticatable
         // 'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getJWTIdentifier(){
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims(){
+        return [
+            'provider' => 'Pawn Shop'
+        ];
+    }
 }
