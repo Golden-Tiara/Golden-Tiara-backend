@@ -20,7 +20,7 @@ class Pawn extends Model
     }
 
     public function golds(): HasMany {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Gold::class);
     }
 
     public function transactions(): HasMany {

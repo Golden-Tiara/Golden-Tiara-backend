@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Examination;
+use App\Models\Gold;
 use Illuminate\Http\Request;
 
-class ExaminationController extends Controller
+class GoldController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,19 +15,21 @@ class ExaminationController extends Controller
     {
         $user = auth()->user();
 
-        $examinations = Examination::get();
+        $golds = Gold::get();
 
         // if($user->isSeller() || $user->isOwner()){
-        //     $examinations = Examination::get();
+        //     $golds = Gold::get();
         // }
         // elseif($user->isCustomer()){
-        //     $examinations = Examination::where('customer_id', $user->national_id)->get();
+        //     $golds = Gold::whereHas('examination', function ($query) use ($user) {
+        //         $query->where('customer_id', $user->national_id);
+        //     })->get();
         // }
         // else{
         //     return response()->json(['error' => 'Unauthenticated'], 401);
         // }
 
-        return $examinations;
+        return $golds;
     }
 
     /**
@@ -41,16 +43,15 @@ class ExaminationController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Examination $examination)
+    public function show(Gold $gold)
     {
-        $golds = $examination->golds;
-        return $examination;
+        return $gold;
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Examination $examination)
+    public function update(Request $request, Gold $gold)
     {
         //
     }
@@ -58,7 +59,7 @@ class ExaminationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Examination $examination)
+    public function destroy(Gold $gold)
     {
         //
     }
