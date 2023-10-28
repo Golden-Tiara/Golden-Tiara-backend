@@ -33,11 +33,13 @@ Route::group([
     Route::post('logout', [AuthController::class, 'logout']);
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
-
 });
 
 Route::apiResource('/examination', ExaminationController::class);
 Route::apiResource('/gold', GoldController::class);
 Route::apiResource('/pawn', PawnController::class);
+
+
+
 
 // Route::get('/examination', [ExaminationController::class, 'index']);
