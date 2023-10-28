@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ExaminationController;
 use App\Http\Controllers\Api\GoldController;
 use App\Http\Controllers\Api\PawnController;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,8 +35,11 @@ Route::group([
     Route::post('refresh', [AuthController::class, 'refresh']);
     Route::post('me', [AuthController::class, 'me']);
     Route::post('register', [AuthController::class, 'register']);
+    Route::get('user', [UserController::class, 'show']);
+    Route::post('user/update', [UserController::class, 'update']);
 
 });
+
 
 Route::apiResource('/examination', ExaminationController::class);
 Route::apiResource('/gold', GoldController::class);
