@@ -37,7 +37,30 @@ class GoldController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'weight' => 'required|numeric',
+            'purity' => 'required|numeric',
+            'image' => 'image|mimes:jpeg,png,jpg,gif',
+        ]);
+
+        $gold = new Gold();
+        $gold->weight = $request->input('weight');
+        $gold->purity = $request->input('purity');
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->extension();
+            $image->move(public_path('images/gold'), $imageName);
+            $gold->image_path = $imageName;
+        }
+
+        $gold->status = "examining";
+        $gold->examination_id = 1;
+
+        $gold->save();
+        $gold->refresh();
+
+        return $gold;
     }
 
     /**
