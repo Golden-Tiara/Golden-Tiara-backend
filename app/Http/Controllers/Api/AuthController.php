@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -10,7 +11,7 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
 
     public function login(Request $request){
@@ -47,6 +48,32 @@ class AuthController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'bearer'
+        ]);
+    }
+
+    public function register(Request $request){
+        $validated = $request->validate([
+            'national_id' => 'required|unique:users',
+            'password' => 'required|min:6',
+            'name' => 'required',
+            'surname' => 'required',
+            'phone_number' => 'required',
+            'image_path' => 'required',
+        ]);
+        if (User::where('national_id', $validated['national_id'])->exists()) {
+            return response()->json([
+                'message' => 'national_id already exists',
+            ], 400);
+        }
+        $user = User::create($validated);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'success' => true,
+            'message' => 'User created successfully',
+            'user' => $user,
+            'access_token' => $token,
         ]);
     }
 }
