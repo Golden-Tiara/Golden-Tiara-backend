@@ -17,3 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('images/{filename}', function ($filename) {
+    return response()->file(public_path('images/' . $filename));
+})->where('filename', '.*');
