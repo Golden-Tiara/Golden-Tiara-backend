@@ -16,7 +16,7 @@ class PawnController extends Controller
         $user = auth()->user();
 
         $pawns = Pawn::get();
-        
+
 
         // if($user->isSeller() || $user->isOwner()){
         //     $pawns = Pawn::get();
@@ -53,32 +53,26 @@ class PawnController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Pawn $pawn)
-{   
-    
-}
-
-
-     
-
+    {
+        //
+    }
 
     public function destroy(Pawn $pawn)
-{
-    $id = $pawn->id;
+    {
+        $id = $pawn->id;
 
-    try {
-        $pawn->delete();
+        try {
+            $pawn->delete();
 
-        return [
-            'message' => "Pawn ID {$id} has been deleted",
-            'success' => true
-        ];
-    } catch (\Exception $e) {
-        return response()->json([
-            'status' => 500,
-            'error' => $e->getMessage(),
-        ], 500);
+            return [
+                'message' => "Pawn ID {$id} has been deleted",
+                'success' => true
+            ];
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
-}
-
-
 }
