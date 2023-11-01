@@ -35,7 +35,14 @@ class ExaminationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $examination = new Examination();
+        $examination->customer_id = $request->get('customer_id');
+        $examination->contract_date = date('Y-m-d');
+
+        $examination->save();
+        $examination->refresh();
+
+        return $examination;
     }
 
     /**
