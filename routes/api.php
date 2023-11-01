@@ -46,6 +46,3 @@ Route::apiResource('/gold', GoldController::class);
 Route::apiResource('/pawn', PawnController::class);
 
 Route::get('/user/check/{nationalId}', [UserController::class, 'findUserByNationalId']);
-
-
-// Route::get('/examination', [ExaminationController::class, 'index']);
