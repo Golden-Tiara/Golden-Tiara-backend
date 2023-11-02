@@ -71,6 +71,7 @@ class PawnController extends Controller
         return [
             'message' => "Pawn ID {$id} has been deleted",
             'success' => true
+            
         ];
     } catch (\Exception $e) {
         return response()->json([

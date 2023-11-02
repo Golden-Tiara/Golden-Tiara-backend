@@ -75,9 +75,19 @@ class GoldController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Gold $gold)
-    {
-        //
+{
+    $status = $request->input('status');
+
+    // อัปเดตสถานะตามค่าที่ได้รับ
+    if ($status === 'pass' || $status === 'not pass') {
+        $gold->status = $status;
+        $gold->save();
+
+        return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
+    } else {
+        return response()->json(['error' => 'สถานะไม่ถูกต้อง'], 400);
     }
+}
 
     /**
      * Remove the specified resource from storage.
