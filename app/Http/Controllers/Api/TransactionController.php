@@ -53,7 +53,7 @@ class TransactionController extends Controller
         $status = $request->input('status');
 
         // อัปเดตสถานะตามค่าที่ได้รับ
-        if ($status === 'pass' || $status === 'not pass') {
+        if ($status === 'completed' || $status === 'rejected') {
             $transaction->status = $status;
             $transaction->save();
 

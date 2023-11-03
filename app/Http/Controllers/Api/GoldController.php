@@ -74,7 +74,7 @@ class GoldController extends Controller
     $status = $request->input('status');
 
     // อัปเดตสถานะตามค่าที่ได้รับ
-    if ($status === 'pass' || $status === 'not pass') {
+    if ($status === 'verified' || $status === 'unverified') {
         $gold->status = $status;
         $gold->save();
 
