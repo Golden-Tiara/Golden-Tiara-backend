@@ -50,20 +50,23 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {  
-        if ($status === 'inprogress'){
-            $status = $request->input('status');
-
-        // อัปเดตสถานะตามค่าที่ได้รับ
-        if ($status === 'completed' || $status === 'rejected') {
-            $transaction->status = $status;
-            $transaction->save();
-
-            return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
+        $status = $request->input('status'); // รับค่าสถานะจาก request
+    
+        if ($transaction->status === 'inprogress') {
+            // ตรวจสอบว่าสถานะเป็น 'inprogress' ก่อนที่จะอัปเดต
+            if ($status === 'completed' || $status === 'rejected') {
+                $transaction->status = $status;
+                $transaction->save();
+    
+                return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
+            } else {
+                return response()->json(['error' => 'สถานะไม่ถูกต้อง'], 400);
+            }
         } else {
-            return response()->json(['error' => 'สถานะไม่ถูกต้อง'], 400);
-        }
+            return response()->json(['error' => 'ไม่สามารถอัปเดตสถานะ เนื่องจากไม่ได้อยู่ในสถานะ inprogress'], 400);
         }
     }
+    
 
 
     /**
