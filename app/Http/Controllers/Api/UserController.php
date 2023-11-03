@@ -68,25 +68,6 @@ class UserController extends Controller
         else{
             return null;
         }
-
-
-        // if ($user) {
-        //     return ['success' => true, 'user' => $user];
-        // } else {
-        //     return ['success' => false];
-        // }
-
-        // if ($user) {
-        //     return response()->json(['found' => true, 'user' => $user]);
-        // } else {
-        //     return response()->json(['found' => false], 404);
-        // }
-
-        // if ($user) {
-        //     return response()->json(['message' => 'User found', 'user' => $user]);
-        // } else {
-        //     return response()->json(['message' => 'No user found'], 404);
-        // }
     }
 
 }
