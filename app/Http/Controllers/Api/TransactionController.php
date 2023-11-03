@@ -49,17 +49,19 @@ class TransactionController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Transaction $transaction)
-    {
-        $status = $request->input('status');
+    {  
+        if ($status === 'inprogress'){
+            $status = $request->input('status');
 
         // อัปเดตสถานะตามค่าที่ได้รับ
-        if ($status === 'pass' || $status === 'not pass') {
+        if ($status === 'completed' || $status === 'rejected') {
             $transaction->status = $status;
             $transaction->save();
 
             return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
         } else {
             return response()->json(['error' => 'สถานะไม่ถูกต้อง'], 400);
+        }
         }
     }
 

@@ -71,10 +71,11 @@ class GoldController extends Controller
      */
     public function update(Request $request, Gold $gold)
 {
-    $status = $request->input('status');
+    if ($status == 'examining'){
+        $status = $request->input('status');
 
     // อัปเดตสถานะตามค่าที่ได้รับ
-    if ($status === 'pass' || $status === 'not pass') {
+    if ($status === 'verified' || $status === 'unverified') {
         $gold->status = $status;
         $gold->save();
 
@@ -82,6 +83,8 @@ class GoldController extends Controller
     } else {
         return response()->json(['error' => 'สถานะไม่ถูกต้อง'], 400);
     }
+    }
+    
 }
 
     /**
