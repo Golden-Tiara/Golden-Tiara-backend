@@ -65,16 +65,16 @@ class PawnController extends Controller
         try {
             $pawn->delete();
 
-            return [
-                'message' => "Pawn ID {$id} has been deleted",
-                'success' => true
-            ];
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 500,
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+        return [
+            'message' => "Pawn ID {$id} has been deleted",
+            'success' => true
+            
+        ];
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 500,
+            'error' => $e->getMessage(),
+        ], 500);
     }
     public function findPawnById($pawn_id)
     {
@@ -88,4 +88,5 @@ class PawnController extends Controller
             return null;
         }
     }
+}
 }
