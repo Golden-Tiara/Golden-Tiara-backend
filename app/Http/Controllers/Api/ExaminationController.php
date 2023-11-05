@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Examination;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr;
 
 class ExaminationController extends Controller
 {
@@ -68,5 +69,18 @@ class ExaminationController extends Controller
     public function destroy(Examination $examination)
     {
         //
+    }
+
+    public function findExaminationById($examinationId)
+    {
+        $examination = Examination::where('id', $examinationId)->first();
+        $golds = $examination->golds;
+
+        if ($examination != null){
+            return $examination;
+        }
+        else{
+            return null;
+        }
     }
 }

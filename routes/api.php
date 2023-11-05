@@ -42,10 +42,13 @@ Route::group([
 });
 
 
+Route::apiResource('/pawn', PawnController::class);
 Route::apiResource('/examination', ExaminationController::class);
 Route::apiResource('/gold', GoldController::class);
-Route::apiResource('/pawn', PawnController::class);
+// Route::apiResource('/pawn', PawnController::class);
 Route::apiResource('/transaction', TransactionController::class);
 Route::apiResource('/user', UserController::class);
 
 Route::get('/user/check/{nationalId}', [UserController::class, 'findUserByNationalId']);
+Route::get('/examination/check/{examinationId}', [ExaminationController::class, 'findExaminationById']);
+Route::get('/pawn/check/{pawn_id}', [PawnController::class, 'findPawnById']);
