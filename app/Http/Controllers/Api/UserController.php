@@ -13,7 +13,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $user = auth()->user();
+
+        $users = user::get();
+
+        return $users;
     }
 
     /**
@@ -27,9 +31,15 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Request $request)
+    public function show(User $national_id)
     {
-        return response()->json($request->user());
+        $nationalId = user::find($national_id);
+
+        if ($nationalId) {
+            return $nationalId;
+        } else {
+            return response()->json(['error' => 'ไม่พบข้อมูล nationalID'], 404);
+        }
     }
 
     /**

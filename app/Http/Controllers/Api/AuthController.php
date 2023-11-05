@@ -65,6 +65,12 @@ class AuthController extends Controller
                 'message' => 'national_id already exists',
             ], 400);
         }
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image->move(public_path('images/user'), $request->image_path);
+        }
+
         $user = User::create($validated);
 
         $token = $user->createToken('auth_token')->plainTextToken;
