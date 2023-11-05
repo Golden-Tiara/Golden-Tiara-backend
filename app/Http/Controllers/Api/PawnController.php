@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Examination;
 use App\Models\Pawn;
 use Illuminate\Http\Request;
 
@@ -82,15 +83,29 @@ class PawnController extends Controller
         try {
             $pawn->delete();
 
-            return [
-                'message' => "Pawn ID {$id} has been deleted",
-                'success' => true
-            ];
-        } catch (\Exception $e) {
-            return response()->json([
-                'status' => 500,
-                'error' => $e->getMessage(),
-            ], 500);
+        return [
+            'message' => "Pawn ID {$id} has been deleted",
+            'success' => true
+
+        ];
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 500,
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+
+}
+    public function findPawnById($pawn_id)
+    {
+        $pawn = Pawn::where('id', $pawn_id)->first();
+        $golds = $pawn->golds;
+
+        if ($pawn != null){
+            return $pawn;
+        }
+        else{
+            return null;
         }
     }
 }
