@@ -51,3 +51,4 @@ Route::apiResource('/transaction', TransactionController::class);
 Route::get('/user/check/{nationalId}', [UserController::class, 'findUserByNationalId']);
 Route::get('/examination/check/{examinationId}', [ExaminationController::class, 'findExaminationById']);
 Route::get('/pawn/check/{pawn_id}', [PawnController::class, 'findPawnById']);
+Route::get('/transaction/check/{pawn_id}', [TransactionController::class, 'findTransactionByPawnId']);

@@ -100,6 +100,7 @@ class PawnController extends Controller
     {
         $pawn = Pawn::where('id', $pawn_id)->first();
         $golds = $pawn->golds;
+        $transactions = $pawn->transactions;
 
         if ($pawn != null){
             return $pawn;
