@@ -73,7 +73,17 @@ class PawnController extends Controller
      */
     public function update(Request $request, Pawn $pawn)
     {
-        //
+
+        $paidAmount = $request->input('paidAmount');
+        $paidTerm = $request->input('paidTerm');
+        $nextPayment = $request->input('nextPayment');
+
+        $pawn->paid_amount = $paidAmount;
+        $pawn->paid_term = $paidTerm;
+        $pawn->next_payment = $nextPayment;
+        $pawn->save();
+
+        return response()->json(['message' => 'Transaction updated successfully']);
     }
 
     public function destroy(Pawn $pawn)
