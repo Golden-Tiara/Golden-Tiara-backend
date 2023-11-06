@@ -67,6 +67,21 @@ class ExaminationController extends Controller
      */
     public function destroy(Examination $examination)
     {
-        //
+        $id = $examination->id;
+
+        try {
+            $examination->delete();
+
+        return [
+            'message' => "examination ID {$id} has been deleted",
+            'success' => true
+            
+        ];
+    } catch (\Exception $e) {
+        return response()->json([
+            'status' => 500,
+            'error' => $e->getMessage(),
+        ], 500);
+    }
     }
 }
