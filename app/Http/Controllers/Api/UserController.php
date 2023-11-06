@@ -31,15 +31,17 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $national_id)
+    public function show(User $user)
     {
-        $nationalId = user::find($national_id);
+        // $nationalId = user::find($user);
 
-        if ($nationalId) {
-            return $nationalId;
-        } else {
-            return response()->json(['error' => 'ไม่พบข้อมูล nationalID'], 404);
-        }
+        // if ($nationalId) {
+        //     return $nationalId;
+        // } else {
+        //     return response()->json(['error' => 'ไม่พบข้อมูล nationalID'], 404);
+        // }
+
+        return $user;
     }
 
     /**
