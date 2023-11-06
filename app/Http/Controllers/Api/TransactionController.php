@@ -81,4 +81,14 @@ class TransactionController extends Controller
         return response()->json(['message' => 'Transaction ถูกลบเรียบร้อย']);
     }
 
+    public function findTransactionByPawnId($pawn_id)
+{
+    $transactions = Transaction::where('pawn_id', $pawn_id)
+        ->whereIn('type', ['onlineInstallment', 'offlineInstallment'])
+        ->get();
+
+    return $transactions;
+}
+
+
 }

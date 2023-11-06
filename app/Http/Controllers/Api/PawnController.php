@@ -37,7 +37,25 @@ class PawnController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pawn = new Pawn();
+        $pawn->customer_id = $request->get('customer_id');
+        $pawn->examination_id = $request->get('examination_id');
+        $pawn->contract_date = date('Y-m-d');
+        $pawn->interest_rate = $request->get('interest_rate');
+        $pawn->loan_amount = $request->get('loan_amount');
+        $pawn->total_term = $request->get('total_term');
+        $pawn->fine = 500;
+        $pawn->shop_payout_type = $request->get('shop_payout_type');
+        $pawn->customer_account = $request->get('customer_account');
+        $pawn->paid_amount = 0;
+        $pawn->paid_term = 0;
+        $pawn->expiry_date = date('Y-m-d', strtotime('+' . $pawn->total_term . ' month'));
+        $pawn->next_payment = date('Y-m-d', strtotime('+1 month'));
+
+        $pawn->save();
+        $pawn->refresh();
+
+        return $pawn;
     }
 
     /**
@@ -82,6 +100,7 @@ class PawnController extends Controller
     {
         $pawn = Pawn::where('id', $pawn_id)->first();
         $golds = $pawn->golds;
+        $transactions = $pawn->transactions;
 
         if ($pawn != null){
             return $pawn;
