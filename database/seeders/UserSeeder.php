@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
         $user->name = "Owner";
         $user->surname = "Owner";
         $user->national_id = "1111111111111";
-        $user->password = "11111111";
+        $user->password = "
+        ";
         $user->phone_number = "0811111111";
 
         $user->role = "owner";
