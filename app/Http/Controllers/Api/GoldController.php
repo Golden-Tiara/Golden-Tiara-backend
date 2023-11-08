@@ -70,15 +70,15 @@ class GoldController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Gold $gold)
-    {  
+    {
         $status = $request->input('status'); // รับค่าสถานะจาก request
-    
+
         if ($gold->status === 'examining') {
             // ตรวจสอบว่าสถานะเป็น 'inprogress' ก่อนที่จะอัปเดต
             if ($status === 'verified' || $status === 'unverified') {
                 $gold->status = $status;
                 $gold->save();
-    
+
                 return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
             } else {
                 return response()->json(['error' => 'สถานะไม่ถูกต้อง'], 400);
@@ -94,5 +94,22 @@ class GoldController extends Controller
     public function destroy(Gold $gold)
     {
         //
+    }
+
+    public function getGoldByUser()
+    {
+        $user = auth()->user();
+        $examinations = $user->examinations;
+
+        // Initialize an array to store the gold records
+        $goldRecords = [];
+
+        // Loop through the user's examinations and retrieve the gold records
+        foreach ($examinations as $examination) {
+            // Get the gold records for each examination
+            $goldRecords = array_merge($goldRecords, $examination->golds->toArray());
+        }
+
+        return $goldRecords;
     }
 }

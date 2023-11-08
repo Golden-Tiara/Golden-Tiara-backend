@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(20)->create();
+        User::factory(10)->create();
 
         $user = new User();
         $user->name = "Owner";
@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $user->national_id = "1111111111111";
         $user->password = "11111111";
         $user->phone_number = "0811111111";
-        
+
         $user->role = "owner";
         $user->save();
 

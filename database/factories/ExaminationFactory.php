@@ -21,7 +21,7 @@ class ExaminationFactory extends Factory
 
         return [
             'customer_id' => $customer,
-            'contract_date' => fake()->dateTime(),
+            'contract_date' => fake()->dateTimeBetween('-1 years'),
             'status' => fake()->randomElement(['inprogress', 'finish'])
         ];
     }

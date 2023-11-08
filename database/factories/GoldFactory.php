@@ -24,8 +24,8 @@ class GoldFactory extends Factory
         return [
             'pawn_id' => $pawn,
             'examination_id' => $examination,
-            'weight' => fake()->randomFloat(2, 0, 1000000),
-            'purity' => fake()->randomFloat(2, 0, 1000000),
+            'weight' => fake()->randomFloat(2, 0.1, 10),
+            'purity' => fake()->randomElement([40,50,80,90,96.5,99.9]),
             'image_path' => null,
             'status' => fake()->randomElement(['examining', 'verified', 'unverified','pawned', 'redeemed', 'unredeemed'])
         ];

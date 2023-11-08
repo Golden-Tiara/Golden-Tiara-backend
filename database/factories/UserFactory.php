@@ -21,12 +21,12 @@ class UserFactory extends Factory
             'national_id' => fake()->numerify('#############'),
             'name' => fake()->name(),
             'surname' => fake()->name(),
-            'phone_number' => fake()->numerify('##########'),
+            'phone_number' => fake()->numerify('0#########'),
             'image_path' => null,
             'role' => fake()->randomElement(['customer', 'seller', 'accountant', 'owner']),
             // 'email' => fake()->unique()->safeEmail(),
             // 'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => 'password', // password
             'remember_token' => Str::random(10),
         ];
     }
