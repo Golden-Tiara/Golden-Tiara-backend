@@ -25,12 +25,12 @@ class TransactionFactory extends Factory
         return [
             'customer_id' => $customer,
             'created_by' => $creator,
-            'amount' => fake()->randomFloat(2, 0, 1000000),
+            'amount' => fake()->randomFloat(2, 0, 100000),
             'type' => fake()->randomElement(['onlineInstallment', 'offlineInstallment', 'ownerTransaction', 'employeeWithdraw']),
             'status' => fake()->randomElement(['inprogress', 'completed', 'rejected']),
             'pawn_id' => $pawn,
-            'term' => fake()->numberBetween(),
-            'transaction_dateTime' => fake()->dateTime()
+            'term' => fake()->numberBetween(1,6),
+            'transaction_dateTime' => fake()->dateTimeBetween('-1 years','+1 years')
         ];
     }
 }

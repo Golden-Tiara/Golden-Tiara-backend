@@ -14,7 +14,7 @@ class PawnSeeder extends Seeder
      */
     public function run(): void
     {
-        Pawn::factory(20)->create();
+        Pawn::factory(15)->create();
 
         // $pawn = new Pawn();
         // $pawn->contract_id = '0123456789';

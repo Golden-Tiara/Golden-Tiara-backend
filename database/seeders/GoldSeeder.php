@@ -13,6 +13,6 @@ class GoldSeeder extends Seeder
      */
     public function run(): void
     {
-        Gold::factory(30)->create();
+        Gold::factory(25)->create();
     }
 }

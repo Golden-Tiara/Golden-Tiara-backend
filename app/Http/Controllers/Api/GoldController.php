@@ -95,4 +95,21 @@ class GoldController extends Controller
     {
         //
     }
+
+    public function getGoldByUser()
+    {
+        $user = auth()->user();
+        $examinations = $user->examinations;
+
+        // Initialize an array to store the gold records
+        $goldRecords = [];
+
+        // Loop through the user's examinations and retrieve the gold records
+        foreach ($examinations as $examination) {
+            // Get the gold records for each examination
+            $goldRecords = array_merge($goldRecords, $examination->golds->toArray());
+        }
+
+        return $goldRecords;
+    }
 }

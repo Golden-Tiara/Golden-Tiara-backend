@@ -53,3 +53,5 @@ Route::get('/user/check/{nationalId}', [UserController::class, 'findUserByNation
 Route::get('/examination/check/{examinationId}', [ExaminationController::class, 'findExaminationById']);
 Route::get('/pawn/check/{pawn_id}', [PawnController::class, 'findPawnById']);
 Route::get('/transaction/check/{pawn_id}', [TransactionController::class, 'findTransactionByPawnId']);
+
+Route::get('/getGoldByUser', [GoldController::class, 'getGoldByUser']);
