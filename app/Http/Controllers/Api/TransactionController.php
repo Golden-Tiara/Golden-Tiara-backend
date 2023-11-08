@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Pawn;
 use App\Models\Transaction;
+use DateTime;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -27,15 +28,27 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $transaction = new Transaction();
+        $transaction->customer_id = $request->customer_id;
+        $user = auth()->user();
+        $transaction->created_by = $user->national_id;
+        $transaction->amount = $request->amount;
+        $transaction->type = "offlineInstallment";
+        $transaction->status = "completed";
+        $transaction->pawn_id = $request->pawn_id;
+        $transaction->term = $request->term;
+        $transaction->transaction_dateTime = date('Y-m-d');
+
+        $transaction->save();
+        $transaction->refresh();
     }
 
     /**
      * Display the specified resource.
      */
-   /**
- * Display the specified resource.
- */
+    /**
+     * Display the specified resource.
+     */
     public function show($id)
     {
         $transaction = Transaction::find($id);
@@ -56,9 +69,22 @@ class TransactionController extends Controller
 
         if ($transaction->status === 'inprogress') {
             // ตรวจสอบว่าสถานะเป็น 'inprogress' ก่อนที่จะอัปเดต
-            if ($status === 'completed' || $status === 'rejected') {
+            if ($status === 'rejected') {
                 $transaction->status = $status;
                 $transaction->save();
+
+                return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
+            } else if ($status === 'completed' ) {
+                $transaction->status = $status;
+                $transaction->transaction_dateTime = date('Y-m-d');
+                $transaction->save();
+                $transaction->refresh();
+
+                $pawn_id = $transaction->pawn_id;
+                $pawn = Pawn::where("id", $pawn_id)->first();
+                $pawn->shop_payout_status = "paid";
+                $pawn->save();
+                $pawn->refresh();
 
                 return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
             } else {
@@ -82,13 +108,11 @@ class TransactionController extends Controller
     }
 
     public function findTransactionByPawnId($pawn_id)
-{
-    $transactions = Transaction::where('pawn_id', $pawn_id)
-        ->whereIn('type', ['onlineInstallment', 'offlineInstallment'])
-        ->get();
+    {
+        $transactions = Transaction::where('pawn_id', $pawn_id)
+            ->whereIn('type', ['onlineInstallment', 'offlineInstallment'])
+            ->get();
 
-    return $transactions;
-}
-
-
+        return $transactions;
+    }
 }

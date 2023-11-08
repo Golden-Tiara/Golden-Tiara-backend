@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Examination;
 use App\Models\Gold;
+use App\Models\Pawn;
 use Illuminate\Http\Request;
 
 class GoldController extends Controller
@@ -73,11 +75,29 @@ class GoldController extends Controller
     {
         $status = $request->input('status'); // รับค่าสถานะจาก request
 
+        $examination_id = $gold->examination_id;
+
         if ($gold->status === 'examining') {
             // ตรวจสอบว่าสถานะเป็น 'inprogress' ก่อนที่จะอัปเดต
             if ($status === 'verified' || $status === 'unverified') {
                 $gold->status = $status;
                 $gold->save();
+
+                $examination = Examination::where('id', $examination_id)->first();
+                $golds = $examination->golds;
+
+                $allVerified = true;
+                foreach ($golds as $g) {
+                    if ($g->status === "examining") {
+                        $allVerified = false;
+                        break;
+                    }
+                }
+
+                if ($allVerified) {
+                    $examination->status = "finish";
+                    $examination->save();
+                }
 
                 return response()->json(['message' => 'สถานะอัปเดตเรียบร้อย']);
             } else {

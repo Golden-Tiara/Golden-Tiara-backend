@@ -26,7 +26,7 @@ class TransactionFactory extends Factory
             'customer_id' => $customer,
             'created_by' => $creator,
             'amount' => fake()->randomFloat(2, 0, 100000),
-            'type' => fake()->randomElement(['onlineInstallment', 'offlineInstallment', 'ownerTransaction', 'employeeWithdraw']),
+            'type' => fake()->randomElement(['onlineInstallment', 'offlineInstallment', 'employeeWithdraw']), //ownerTransaction
             'status' => fake()->randomElement(['inprogress', 'completed', 'rejected']),
             'pawn_id' => $pawn,
             'term' => fake()->numberBetween(1,6),

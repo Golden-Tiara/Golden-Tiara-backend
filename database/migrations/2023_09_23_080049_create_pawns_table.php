@@ -24,8 +24,8 @@ return new class extends Migration
             $table->integer('total_term');
             $table->float('fine');
             $table->string('shop_payout_status')->default('pending'); //pending, paid
-            $table->string('shop_payout_type'); //cash, transaction
-            $table->string('customer_account')->nullable();
+            // $table->string('shop_payout_type'); //cash, transaction
+            // $table->string('customer_account')->nullable();
             $table->float('paid_amount');
             $table->integer('paid_term');
             $table->date('next_payment');

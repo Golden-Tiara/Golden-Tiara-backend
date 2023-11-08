@@ -18,11 +18,11 @@ return new class extends Migration
             $table->foreignIdFor(User::class, 'customer_id');
             $table->foreignIdFor(User::class, 'created_by');
             $table->float('amount');
-            $table->string('type'); //onlineInstallment, offlineInstallment, ownerTransaction, employeeWithdraw
+            $table->string('type'); //onlineInstallment, offlineInstallment, employeeWithdraw
             $table->string('status'); //inprogress, completed, rejected
             $table->foreignIdFor(Pawn::class, 'pawn_id');
             $table->integer('term')->nullable();
-            $table->dateTime('transaction_dateTime');
+            $table->dateTime('transaction_dateTime')->nullable();
             $table->timestamps();
         });
     }

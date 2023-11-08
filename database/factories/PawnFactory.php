@@ -31,8 +31,8 @@ class PawnFactory extends Factory
             'total_term' => fake()->numberBetween(1,6),
             'fine' => 500,
             'shop_payout_status' => fake()->randomElement(['pending', 'paid']),
-            'shop_payout_type' => fake()->randomElement(['cash', 'transaction']),
-            'customer_account' => fake()->numerify('#############'),
+            // 'shop_payout_type' => fake()->randomElement(['cash', 'transaction']),
+            // 'customer_account' => fake()->numerify('#############'),
 
             'loan_amount' => fake()->randomFloat(2, 0, 100000),
             'paid_amount' => fake()->randomFloat(2, 0, 100000),
