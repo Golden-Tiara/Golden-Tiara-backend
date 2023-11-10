@@ -16,13 +16,12 @@ class UserSeeder extends Seeder
         User::factory(10)->create();
 
         $user = new User();
+
         $user->name = "Owner";
         $user->surname = "Owner";
         $user->national_id = "1111111111111";
-        $user->password = "
-        ";
+        $user->password = "11111111";
         $user->phone_number = "0811111111";
-
         $user->role = "owner";
         $user->save();
 
